@@ -1,4 +1,6 @@
-Week4 : Prediction Assignment Write up
+                                      Week4 : Prediction Assignment Write up
+
+
 The goal of this work is to predict the activity done by humans based on the analysis done in http://groupware.les.inf.puc-rio.br/har.  To build this model, we are using pml training and testing datasets, which is being provided in the above mentioned website.
 PACKAGES USED FOR ANALYSIS
 For the analysis , the following packages are loaded
@@ -7,7 +9,7 @@ For the analysis , the following packages are loaded
 > library(dplyr)
 > library(caret)
 
-READ THE DATA
+READ THE DATA:
 Initially we have to read the csv files pml-training  and pml-testing and also have to identify the missing values ,NA , Divison error values
 > pmltrain<-read.csv("E:/Rprogram/mlweek4/pml-training.csv",header=T,na.strings=c("NA","","#DIV/0!"))
 > dim(pmltrain)
@@ -95,7 +97,7 @@ Initially we have to read the csv files pml-training  and pml-testing and also h
 [159] "magnet_forearm_z"         "classe"
 
 >pmltest<-read.csv("E:/Rprogram/mlweek4/pml-testing.csv",na.strings=c("NA","","#DIV/0!"))
-SPLITTING THE TRAINING DATA
+SPLITTING THE TRAINING DATA:
 To build the model and to create out of sample error data partition is done on pml-training data in a ration 70%:30% 
 > set.seed(32234)
 > inTrain<-createDataPartition(y=pmltrain$classe,list=F,p=0.7)
@@ -103,7 +105,7 @@ To build the model and to create out of sample error data partition is done on p
 > testData<-pmltrain[-inTrain,]
 > table(is.na(trainData))
 
-Find which variables (if any) that are mostly na values
+Find which variables (if any) that are mostly na values:
 > naprops <- colSums(is.na(trainData))/nrow(trainData)
 > mostlyNAs <- names(naprops[naprops > 0.75]) # mostly being 75%
 > mostlyNACols <- which(naprops > 0.75) # there's about 100 of them
